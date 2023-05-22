@@ -1,5 +1,11 @@
+@font-face {
+    font-family: "Lato";
+    src: url("../fonts/Lato-Regular.ttf") format("truetype");
+    font-weight: normal;
+}
 body, p, h1, h2 {
     margin: 0;
+    font-family: "Lato", sans-serif;
 }
 body {
     overflow: hidden;
@@ -18,6 +24,81 @@ body {
     display: flex;
     flex-direction: column;
 }
+.screen-container {
+    height: calc(100vh - 225px);
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.screen {
+    width: 70%;
+    height: 600px;
+    background: #fff;
+    box-shadow: 0 0 9px 5px rgba(255, 255, 255, 0.62);
+    display: flex;
+    align-items: center;
+}
+.screen-film {
+    width: 100%;
+    height: 550px;
+    background-color: #0b0b0b;
+    display: flex;
+    flex-direction: column;
+}
+
+.film-content {
+    height: 350px;
+    width: 100%;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+}
+.film-icon-title-container {
+    margin-top: 110px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.film-title-container {
+    margin-left: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.film-title {
+    font-size: 60px;
+    font-weight: bold;
+    opacity: 0;
+}
+.film-subtitle {
+    font-size: 21px;
+    text-align: left;
+    opacity: 0;
+}
+.main-icon {
+    margin-top: 10px;
+    width: 120px;
+    height: 120px;
+    background-image: url("../images/moviescope.svg");
+    background-size: cover;
+    opacity: 0;
+    animation: rotation 1.5s ease-in-out infinite;
+}
+.theater-bottom {
+    height: 225px;
+    width: 100%;
+    background-color: #0b0b0b;
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+}
+.seats {
+    background-image: url("../images/seats.png");
+    width: 1440px;
+    height: 95px;
+}
 
 .opener-container {
     width: 100%;
@@ -27,7 +108,7 @@ body {
 .opener {
     width: 50%;
     height: 100%;
-    z-index: 5;
+    z-index: 3;
     position: absolute;
 }
 .opener-left{
@@ -40,18 +121,17 @@ body {
 .curtain {
     width: 360px;
     height: 100%;
-    float: left;
+    position: absolute;
+    background-size: cover;
 }
-.curtain-left {
-    float: left;
+.curtain:nth-child(1) {
     background-image: url("../images/curtain_left.png");
+    left: 0;
 }
-.curtain-right {
-    float: right;
-    right: 0;
+.curtain:nth-child(2) {
     background-image: url("../images/curtain_right.png");
+    right: 0;
 }
-
 @media (max-width: 900px) {
     .main-container { /* 모바일 환경에서 뷰포트 크기를 100vw로 설정하면 스크롤이 발생하는 문제 해결*/
         width: 100vw;
