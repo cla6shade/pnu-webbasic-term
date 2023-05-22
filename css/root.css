@@ -84,7 +84,7 @@ body {
     background-image: url("../images/moviescope.svg");
     background-size: cover;
     opacity: 0;
-    animation: rotation 1.5s ease-in-out infinite;
+    cursor: pointer;
 }
 .theater-bottom {
     height: 225px;
