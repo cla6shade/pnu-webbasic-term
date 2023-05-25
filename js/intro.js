@@ -103,8 +103,8 @@ intro.onLogoClick = () => {
         {opacity: 0},
     ]
     let vanish_options = {
-        delay: 700,
-        duration: 1000,
+        delay: 300,
+        duration: 500,
         easing: "ease-in",
         fill: "forwards"
     }
@@ -123,8 +123,17 @@ intro.onLogoClick = () => {
     curtain_left.animate(keyFrames_curtain_left, vanish_options);
     curtain_right.animate(keyFrames_curtain_right, vanish_options);
 
+    vanish_options.delay = 600;
     title.animate(keyFrames_vanish, vanish_options);
     subtitle.animate(keyFrames_vanish, vanish_options);
     icon.animate(keyFrames_vanish, vanish_options);
+
+    setTimeout(() =>{
+            curtain_left.style.display = "none";
+            curtain_right.style.display = "none";
+            document.querySelector(".film-content")
+                .style.display = "none";
+            //메인 페이지 레이아웃 보이도록 display: flex로.
+    }, vanish_options.delay + vanish_options.duration);
 }
 export default intro;
