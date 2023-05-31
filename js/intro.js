@@ -178,7 +178,7 @@ intro.mainView = () => {
 
     let keyframes = [
         {},
-        {background: "#fff"}
+        {background: "#000"}
     ]
 
     let keyframes_main = [
@@ -188,9 +188,18 @@ intro.mainView = () => {
     let theater = document.querySelector(".theater-container");
     theater.animate(keyframes, options);
 
+    options.delay = 700;
+    options.duration = 800;
+
     let main = document.querySelector(".main-content");
     main.style.display = "flex";
     main.animate(keyframes_main, options);
+
+    let keyframes_after = [
+        {},
+        {background: "transparent"}
+    ]
+    theater.animate(keyframes_after, options);
 }
 
 intro.removeTitle = (delay = 0) =>{

@@ -7,6 +7,9 @@ body, p, h1, h2 {
     margin: 0;
     font-family: "Lato", sans-serif;
 }
+a {
+    text-decoration: none;
+}
 body {
     overflow: hidden;
     background-color: #1e1e1e;
