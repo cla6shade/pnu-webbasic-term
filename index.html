@@ -10,13 +10,6 @@
     <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
-<div class="curtain"></div>
-<div class="curtain"></div>
-
-<div class="opener-container">
-    <div class="opener opener-left"></div>
-    <div class="opener opener-right"></div>
-</div>
 
 <div class="main-container">
     <div class="theater-container">
@@ -37,7 +30,7 @@
             </header>
             <div class="content-container">
                 <div class="title-tab">
-                    <div class="title-container">
+                    <div class="content title-container">
                         <h1>MOVIESCOPE</h1>
                         <p>
                             201914524 이세형
@@ -51,35 +44,30 @@
                             <p>View Github</p>
                         </a>
                     </div>
+                    <div class="content daily-container">
+                        <h1>Daily Box Office</h1>
+                        <div class="date-input-container">
+                            <p>날짜 입력: </p>
+                            <input type="number" id="date-year" placeholder="YYYY"/>
+                            <input type="number" id="date-month" placeholder="MM"/>
+                            <input type="number" id="date-date" placeholder="DD"/>
+                            <input type="button" id="daily-submit" value="확인" onclick="onClickDaily()"/>
+                        </div>
+                        <div class="box-office-container">
+
+                        </div>
+                    </div>
                 </div>
             </div>
             <footer class="main-footer">
                 <p>&copy; cla6shade, 2023</p>
             </footer>
         </div>
-        <div class="screen-container">
-            <div class="screen">
-                <div class="film-content">
-                    <div class="film-icon-title-container">
-                        <div class="main-icon"></div>
-                        <div class="film-title-container">
-                            <h1 class="film-title">
-                                MovieScope
-                            </h1>
-                            <p class="film-subtitle">
-                                click the rolling film to start! &copy; @cla6shade
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="theater-bottom">
-            <div class="seats">
-            </div>
-        </div>
     </div>
 </div>
-<script src="js/index.js" type="module"></script>
+<script src="https://code.jquery.com/jquery-3.7.0.min.js"
+        integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g="
+        crossorigin="anonymous"></script>
+<script src="js/main.js"></script>
 </body>
 </html>
