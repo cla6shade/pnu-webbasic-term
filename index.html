@@ -6,8 +6,8 @@
     <title>Title</title>
 
     <link rel="stylesheet" href="css/root.css">
-    <link rel="stylesheet" href="css/intro.css">
     <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/daily.css">
 </head>
 <body>
 
@@ -22,14 +22,23 @@
                                 <div class="github-icon"></div>
                             </a>
                         </li>
-                        <li>DAILY</li>
-                        <li>YEARLY</li>
-                        <li>THEATERS</li>
+                        <li>
+                            <p onclick="transfer(HOME)">HOME</p>
+                        </li>
+                        <li>
+                            <p onclick="transfer(DAILY)">DAILY</p>
+                        </li>
+                        <li>
+                            <p onclick="transfer(YEARLY)">YEARLY</p>
+                        </li>
+                        <li>
+                            <p onclick="transfer(THEATERS)">THEATERS</p>
+                        </li>
                     </ul>
                 </nav>
             </header>
             <div class="content-container">
-                <div class="title-tab">
+                <div class="tab-container">
                     <div class="content title-container">
                         <h1>MOVIESCOPE</h1>
                         <p>
@@ -54,14 +63,16 @@
                             <input type="button" id="daily-submit" value="확인" onclick="onClickDaily()"/>
                         </div>
                         <div class="box-office-container">
-
+                            <div class="loading" id="daily-loading">
+                            </div>
                         </div>
                     </div>
+
                 </div>
+                <footer class="main-footer">
+                    <p>&copy; cla6shade, 2023</p>
+                </footer>
             </div>
-            <footer class="main-footer">
-                <p>&copy; cla6shade, 2023</p>
-            </footer>
         </div>
     </div>
 </div>
@@ -69,5 +80,6 @@
         integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g="
         crossorigin="anonymous"></script>
 <script src="js/main.js"></script>
+<script src="js/transition.js"></script>
 </body>
 </html>
