@@ -1,0 +1,7 @@
+.theaters-container {
+    display: none;
+    flex-direction: column;
+}
+.theaters-area {
+    flex-grow: 1;
+}

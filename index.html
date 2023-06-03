@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="css/root.css">
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/daily.css">
+    <link rel="stylesheet" href="css/yearly.css">
+    <link rel="stylesheet" href="css/theaters.css">
 </head>
 <body>
 
@@ -41,15 +43,15 @@
                 <div class="tab-container">
                     <div class="content title-container">
                         <h1>MOVIESCOPE</h1>
-                        <p>
+                        <h3>
                             201914524 이세형
-                        </p>
+                        </h3>
                         <hr>
                         <p>
                             일별 박스오피스 순위 조회, 연간 개봉 영화 정보, 지역 영화관 정보를 제공합니다.
                             위 내비게이션 바의 메뉴를 클릭해서 이용해보세요.
                         </p>
-                        <a class="box-office-button" href="https://github.com/cla6shade">
+                        <a class="main-button" href="https://github.com/cla6shade">
                             <p>View Github</p>
                         </a>
                     </div>
@@ -63,11 +65,29 @@
                             <input type="button" id="daily-submit" value="확인" onclick="onClickDaily()"/>
                         </div>
                         <div class="box-office-container">
-                            <div class="loading" id="daily-loading">
-                            </div>
                         </div>
                     </div>
 
+                    <div class="content yearly-container">
+                        <h1>Yearly Released</h1>
+                        <div class="date-input-container">
+                            <p>조회할 연도 입력: </p>
+                            <input type="number" id="released-year" placeholder="YYYY" />
+                            <input type="button" id="yearly-submit" value="확인" onclick="onClickYearly()"/>
+                        </div>
+                        <div class="yearly-released-container">
+                        </div>
+                    </div>
+
+                    <div class="content theaters-container">
+                        <h1>Theaters</h1>
+                        <h3>영화관 조회</h3>
+                        <hr>
+                        <p>주변 영화관을 검색해보세요. Naver Map API를 이용하여 주변의 영화관을 조회할 수 있습니다.</p>
+                        <div class="theaters-area">
+
+                        </div>
+                    </div>
                 </div>
                 <footer class="main-footer">
                     <p>&copy; cla6shade, 2023</p>

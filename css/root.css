@@ -3,31 +3,97 @@
     src: url("../fonts/Lato-Regular.ttf") format("truetype");
     font-weight: normal;
 }
+
 body, p, h1, h2 {
     margin: 0;
     font-family: "Lato", sans-serif;
 }
+
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
 }
-body{
+
+body {
     background-image: url("../images/main_header.jpg");
     background-size: cover;
     background-attachment: fixed;
     overflow-x: hidden;
 }
+
 a {
     text-decoration: none;
 }
+
 :root {
     --vh: 100%;
 }
+
+::-webkit-scrollbar {
+    width: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+    width: 3px;
+    background-color: #fff;
+}
+
+::-webkit-scrollbar-track {
+    width: 4px;
+    background-color: black;
+}
+
+h1 + h3 {
+    font-size: 23px;
+    color: #ff6565;
+    margin-top: 6px;
+    font-weight: normal;
+}
+
+h1 + hr, h3 + hr {
+    width: 100px;
+    height: 1px;
+    border: none;
+    margin-top: 15px;
+    background-color: white;
+}
+
+hr + p {
+    color: #fff;
+    width: 400px;
+    margin: 20px 0 10px 0;
+    font-size: 15px;
+}
+
 .main-container {
     width: 100vw;
     height: 100vh;
 }
+
+input[type='button'][value='확인'] {
+    border-radius: 5px;
+    background-color: #000;
+    height: 100%;
+    text-align: center;
+    width: 60px;
+    margin-left: 10px;
+    box-sizing: border-box;
+    border: #fff 1px solid;
+    color: #fff;
+    cursor: pointer;
+    transition: 200ms ease-out;
+}
+
+input[type='button'][value='확인']:hover {
+    background-color: #fff;
+    color: #000;
+}
+
+input[type='number']::placeholder {
+    font-size: 15px;
+}
+
 
 @media (max-width: 900px) {
     .main-container { /* 모바일 환경에서 뷰포트 크기를 100vw로 설정하면 스크롤이 발생하는 문제 해결*/

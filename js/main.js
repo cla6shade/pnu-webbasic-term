@@ -43,15 +43,19 @@ function onClickDaily() {
     let dateInputs =
         document.querySelectorAll(".date-input-container input[type='number']");
     let dates = []
+
+    let container = document.querySelector(".box-office-container");
+    container.innerHTML = '<div class="loading" id="daily-loading"></div>';
+
     dateInputs.forEach((e) => {
         dates.push(parseInt(e.value));
     })
     let [year, month, date] = dates;
-    if (! this.isValidDate(year, month, date)) {
+    if (!this.isValidDate(year, month, date)) {
         alert("잘못된 날짜입니다. 확인 후 다시 시도해주세요.");
         return;
     }
-    if(this.isSameOrAfterToday(year, month, date)){
+    if (this.isSameOrAfterToday(year, month, date)) {
         alert("금일 기준 하루 이전 날짜부터 조회가 가능합니다.");
         return;
     }
@@ -60,13 +64,14 @@ function onClickDaily() {
     getDailyBoxOffice(year, month, date).then((boxOffice) => {
         setDailyLoadingStatus(false);
         displayDailyBoxOffice(boxOffice);
+    }).catch(error => {
+        alert(error);
     })
 }
 
-function displayDailyBoxOffice(boxOffice){
+function displayDailyBoxOffice(boxOffice) {
     const container = document.querySelector(".box-office-container");
-    container.innerHTML = "";
-    for(let movie of boxOffice){
+    for (let movie of boxOffice) {
         let posterUrl = movie.posterUrl;
         let movieArea = document.createElement("div");
         movieArea.classList.add("movie-area");
@@ -88,8 +93,80 @@ function displayDailyBoxOffice(boxOffice){
     }
 }
 
+function requestYearlyReleased(year, page) {
+    return new Promise((resolve, reject) => {
+        $.ajax('http://www.kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieList.json?key=' +
+            key + '&openStartDt=' + year.toString() + '&openEndDt=' + year.toString() + '&itemPerPage=20&curPage=' + page
+        ).done(async data => {
+            resolve(data);
+        }).fail((xhr, textStatus, error) => {
+            reject(error);
+        });
+    })
+}
+
+function onClickYearly() {
+    let container = document.querySelector('.yearly-released-container');
+    container.innerHTML = '<div class="loading" id="daily-loading"></div>';
+
+    let year = document.getElementById("released-year").value;
+    year = parseInt(year);
+    let nowYear = new Date().getFullYear();
+    if (year < 1940 || year > nowYear) {
+        alert("1939년도 이전이나 " + nowYear.toString() + "년도 이후의 영화는 조회할 수 없습니다.");
+        return;
+    }
+
+    setDailyLoadingStatus(true);
+    requestYearlyReleased(year, 1).then(data => {
+        setDailyLoadingStatus(false);
+        let res = data.movieListResult;
+        let movieList = res.movieList;
+
+        let table = document.createElement('table');
+        let headerRow = document.createElement('tr');
+        let thData = ['번호', '영화명', '개봉일', '개봉여부', '장르', '제작국가'];
+
+        for(let thDatum of thData){
+            let th = document.createElement('th');
+            th.innerText = thDatum;
+            headerRow.appendChild(th);
+        }
+
+        table.appendChild(headerRow);
+
+        for (let i = 0; i < 20; i++) {
+            let singleRow = document.createElement('tr');
+            let movie = movieList[i];
+
+            let openDate = movie.openDt;
+            let dateString = openDate.slice(0, 4) + "-" +
+                openDate.slice(4, 6) + "-" + openDate.slice(6, 8);
+
+            if(typeof movie.genreAlt.split('성인물')[1] !== 'undefined'){
+                movie.movieNm = "(성인물 필터)";
+            }
+            let movieData = [
+                (i+1).toString(), movie.movieNm, dateString,
+                movie.prdtStatNm, movie.genreAlt, movie.nationAlt
+            ];
+            for(let movieDatum of movieData) {
+                let td = document.createElement('td');
+                td.innerText = movieDatum;
+                singleRow.appendChild(td);
+            }
+
+            table.appendChild(singleRow);
+            setDailyLoadingStatus(false);
+            container.appendChild(table);
+        }
+    }).catch(error =>{
+        alert(error);
+    })
+}
+
 function setDailyLoadingStatus(loading = true) {
-    let spin = document.getElementById("daily-loading");
+    let spin = document.querySelector(".loading");
     if (loading) {
         spin.style.display = "block";
     } else {
@@ -100,7 +177,8 @@ function setDailyLoadingStatus(loading = true) {
 function isLeapYear(year) {
     return (year % 4 === 0 && year % 100 !== 0) || year % 400 === 0;
 }
-function isSameOrAfterToday(year, month, day){
+
+function isSameOrAfterToday(year, month, day) {
     month = parseInt(month) - 1
     const date = year.toString() + "-" + month.toString() + "-" + day.toString();
     const nowDate = new Date();

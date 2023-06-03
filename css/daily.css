@@ -27,23 +27,7 @@
     box-sizing: border-box;
 }
 
-#daily-submit {
-    border-radius: 5px;
-    background-color: #000;
-    height: 100%;
-    text-align: center;
-    width: 60px;
-    margin-left: 10px;
-    box-sizing: border-box;
-    border: #fff 1px solid;
-    color: #fff;
-}
-
-#daily-submit:hover {
-
-}
-
-.date-input-container input[type='number']:nth-child(2) {
+input[type='number'][placeholder="YYYY"] {
     margin-left: 10px;
     width: 120px;
 }
@@ -57,7 +41,7 @@
     margin-left: 10px;
     width: 80px;
 }
-.box-office-button {
+.main-button {
     width: 150px;
     height: 45px;
     border-radius: 30px;
@@ -73,7 +57,7 @@
     background-color: #000;
 }
 
-.box-office-button:hover {
+.main-button:hover {
     background-color: #fff;
     color: #000;
     border: #000 1px solid;
