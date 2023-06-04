@@ -1,6 +1,13 @@
 const key = "12bc474714005e3fb5259fa5f0cfc9be"
 
+/**
+ * movieCd를 기반으로 포스터를 받아오는 기능.
+ * openAPI에서 제공하지 않는 기능을 만들기 위해 웹 서버를 직접 만들었음.
+ * @param movieCd
+ * @returns {Promise<unknown>}
+ */
 function getPosterUrl(movieCd) {
+    //Promise로 wrap. 올바른 데이터를 받은 경우 resolve하도록. 아닌 경우 reject.
     return new Promise((resolve, reject) => {
         $.ajax("http://server.cla6sha.de:14524?movieCd=" + movieCd.toString(), {dataType: 'json'})
             .done(data => {
@@ -12,7 +19,7 @@ function getPosterUrl(movieCd) {
 }
 
 /**
- *
+ * kobis OPEN API 활용 1, 일별 박스오피스 순위를 받아옴. 리턴값에 포스터 url주소도 포함하여 리턴.
  * @param targetDt
  * @returns {Promise<Object[]>}
  */
@@ -32,6 +39,13 @@ function requestDailyBoxOffice(targetDt) {
     })
 }
 
+/**
+ * 연, 월, 일을 받아서 일별 박스오피스 조회.
+ * @param y
+ * @param m
+ * @param d
+ * @returns {Promise<Object[]>}
+ */
 async function getDailyBoxOffice(y, m, d) {
     m = m < 10 ? "0" + m.toString() : m.toString();
     d = d < 10 ? "0" + d.toString() : d.toString();
@@ -39,6 +53,9 @@ async function getDailyBoxOffice(y, m, d) {
     return await requestDailyBoxOffice(targetDt);
 }
 
+/**
+ * daily 탭에 날짜를 입력하고 확인을 눌렀을 때 실행되는 메소드
+ */
 function onClickDaily() {
     let dateInputs =
         document.querySelectorAll(".date-input-container input[type='number']");
@@ -51,10 +68,12 @@ function onClickDaily() {
         dates.push(parseInt(e.value));
     })
     let [year, month, date] = dates;
+    // 입력 오류 핸들링
     if (!this.isValidDate(year, month, date)) {
         alert("잘못된 날짜입니다. 확인 후 다시 시도해주세요.");
         return;
     }
+    // openAPI 특성상 하루 전 날의 데이터부터 조회 가능.
     if (this.isSameOrAfterToday(year, month, date)) {
         alert("금일 기준 하루 이전 날짜부터 조회가 가능합니다.");
         return;
@@ -64,11 +83,15 @@ function onClickDaily() {
     getDailyBoxOffice(year, month, date).then((boxOffice) => {
         setDailyLoadingStatus(false);
         displayDailyBoxOffice(boxOffice);
-    }).catch(error => {
+    }).catch(error => { // 네트워크 등 ajax 오류 시 reject 콜백
         alert(error);
     })
 }
 
+/**
+ * 일별 박스오피스 순위를 받아서 daily 탭의 flexbox에 표시.
+ * @param boxOffice
+ */
 function displayDailyBoxOffice(boxOffice) {
     const container = document.querySelector(".box-office-container");
     for (let movie of boxOffice) {
@@ -93,6 +116,12 @@ function displayDailyBoxOffice(boxOffice) {
     }
 }
 
+/**
+ * 해당 연도에 개봉/개봉예정인 영화를 받아옴. kobis Open API
+ * @param year
+ * @param page
+ * @returns {Promise<unknown>}
+ */
 function requestYearlyReleased(year, page) {
     return new Promise((resolve, reject) => {
         $.ajax('http://www.kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieList.json?key=' +
@@ -105,10 +134,14 @@ function requestYearlyReleased(year, page) {
     })
 }
 
+/**
+ * Yearly 탭의 연도 입력 후 확인 버튼을 눌렀을 때 동작.
+ */
 function onClickYearly() {
     let year = document.getElementById("released-year").value;
     year = parseInt(year);
     let nowYear = new Date().getFullYear();
+    // 잘못된 연도인 경우
     if (year < 1940 || year > nowYear) {
         alert("1939년도 이전이나 " + nowYear.toString() + "년도 이후의 영화는 조회할 수 없습니다.");
         return;
@@ -161,11 +194,16 @@ function onClickYearly() {
             setDailyLoadingStatus(false);
             container.appendChild(table);
         }
-    }).catch(error =>{
+    }).catch(error =>{ // 네트워크 등 ajax 오류 시 reject 콜백
         alert(error);
     })
 }
 
+/**
+ * 데이터 로딩할 때 회전하는 아이콘을 화면에 표시.
+ * 로딩이 끝날 경우 display를 none으로 설정해서 화면상에서 사라지도록.
+ * @param loading
+ */
 function setDailyLoadingStatus(loading = true) {
     let spin = document.querySelector(".loading");
     if (loading) {
@@ -175,10 +213,22 @@ function setDailyLoadingStatus(loading = true) {
     }
 }
 
+/**
+ * 윤년 체크 메소드. 잘못된 날짜 판별용
+ * @param year
+ * @returns {boolean}
+ */
 function isLeapYear(year) {
     return (year % 4 === 0 && year % 100 !== 0) || year % 400 === 0;
 }
 
+/**
+ * daily box office 조회 탭에서, 날짜가 오늘 날짜보다 이후인 경우를 판별하는 메소드.
+ * @param year
+ * @param month
+ * @param day
+ * @returns {boolean}
+ */
 function isSameOrAfterToday(year, month, day) {
     month = parseInt(month) - 1
     const date = year.toString() + "-" + month.toString() + "-" + day.toString();
@@ -189,6 +239,13 @@ function isSameOrAfterToday(year, month, day) {
     return dateString <= date;
 }
 
+/**
+ * 윤년 여부를 포함하여 올바른 날짜인지 체크하는 메소드
+ * @param year
+ * @param month
+ * @param day
+ * @returns {boolean}
+ */
 function isValidDate(year, month, day) {
     const date = new Date(year, month - 1, day);
     if (date.getFullYear() === year &&

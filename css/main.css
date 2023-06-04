@@ -1,4 +1,5 @@
 .main-content {
+    /*flexbox*/
     width: 100%;
     height: 100%;
     display: flex;
@@ -25,6 +26,7 @@
     margin: 0;
     padding-left: 50px;
     height: 30px;
+    width: 100%;
 }
 
 .github-icon {
@@ -38,6 +40,7 @@
     font-weight: bold;
     list-style: none;
     float: left;
+    /* float를 이용한 navbar 레이아웃 구성 */
     color: #fff;
     display: flex;
     align-items: center;
@@ -107,9 +110,18 @@
     height: 30px;
     font-size: 15px;
 }
-
 @media (max-width: 900px) {
+    /* 모바일 환경 대응 */
+    .main-container { /* 모바일 환경에서 뷰포트 크기를 100vw로 설정하면 스크롤이 발생하는 문제 해결*/
+        width: 100vw;
+        height: calc(var(--vh, 1vh) * 100);
+    }
+
+    .navbar ul {
+        padding-left: 20px;
+    }
+
     .navbar ul li {
-        width: 90px;
+        width: 80px;
     }
 }

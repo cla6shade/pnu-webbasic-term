@@ -16,9 +16,10 @@
 <div class="main-container">
     <div class="theater-container">
         <div class="main-content">
-            <header class="main-header">
+            <header class="main-header"> <!-- Semantic(Header, Navigation) -->
                 <nav class="navbar">
                     <ul>
+                        <!-- unordered list를 활용한 navbar 구성 -->
                         <li>
                             <a href="https://github.com/cla6shade">
                                 <div class="github-icon"></div>
@@ -72,10 +73,11 @@
                         <h1>Yearly Released</h1>
                         <div class="date-input-container">
                             <p>조회할 연도 입력: </p>
-                            <input type="number" id="released-year" placeholder="YYYY" />
+                            <input type="number" id="released-year" placeholder="YYYY"/>
                             <input type="button" id="yearly-submit" value="확인" onclick="onClickYearly()"/>
                         </div>
                         <div class="yearly-released-container">
+                            <!-- table이 올 구역-->
                         </div>
                     </div>
 
@@ -96,6 +98,7 @@
                         </div>
                     </div>
                 </div>
+                <!-- Semantic(Footer)-->
                 <footer class="main-footer">
                     <p>&copy; cla6shade, 2023</p>
                 </footer>

@@ -16,7 +16,7 @@
     font-size: 20px;
     color: #fff;
 }
-
+/*Attribute Selectors, Pseudo-classes*/
 .date-input-container input[type='number'] {
     border-radius: 5px;
     border: #fff 1px solid;
@@ -57,6 +57,7 @@ input[type='number'][placeholder="YYYY"] {
     background-color: #000;
 }
 
+/* Pseudo class */
 .main-button:hover {
     background-color: #fff;
     color: #000;
@@ -82,11 +83,13 @@ input[type='number'][placeholder="YYYY"] {
     border-radius: 7px;
     text-align: center;
 }
+/* combinator 1 */
 .movie-area img.poster {
     width: 230px;
     height: 300px;
     border-radius: 7px 7px 0 0;
 }
+/* combinator 2 */
 .movie-area h4 {
     font-size: 17px;
     margin-top: 10px;

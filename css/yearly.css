@@ -30,7 +30,7 @@ td {
     border: #fff 1px solid;
     padding: 0;
 }
-
+/* Pseudo class */
 th:nth-child(1), th:last-child {
     min-width: 70px;
 }

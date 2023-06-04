@@ -29,7 +29,7 @@ a {
 :root {
     --vh: 100%;
 }
-
+/*Pseudo Elements(4개) */
 ::-webkit-scrollbar {
     width: 4px;
 }
@@ -42,6 +42,10 @@ a {
 ::-webkit-scrollbar-track {
     width: 4px;
     background-color: black;
+}
+
+input[type='number']::placeholder {
+    font-size: 15px;
 }
 
 h1 + h3 {
@@ -71,6 +75,7 @@ hr + p {
     height: 100vh;
 }
 
+/*Attribute Selector 1*/
 input[type='button'][value='확인'], button {
     border-radius: 5px;
     background-color: #000;
@@ -90,12 +95,8 @@ input[type='button'][value='확인']:hover, button:hover {
     color: #000;
 }
 
-input[type='number']::placeholder {
-    font-size: 15px;
-}
-
-
 @media (max-width: 900px) {
+    /* 모바일 환경 대응 */
     .main-container { /* 모바일 환경에서 뷰포트 크기를 100vw로 설정하면 스크롤이 발생하는 문제 해결*/
         width: 100vw;
         height: calc(var(--vh, 1vh) * 100);

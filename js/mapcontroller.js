@@ -1,6 +1,11 @@
 let map;
 let searchable = new kakao.maps.services.Places();
 let renewBtnEnabled = false;
+
+/**
+ * Geolocation API를 이용하여, 브라우저에서 위치 정보를 불러와서 사용.
+ * @returns {Promise<GeolocationPosition>}
+ */
 function updateLocationInfo() {
     return new Promise((resolve, reject) => {
         navigator.geolocation.getCurrentPosition((position)=>{
@@ -10,6 +15,10 @@ function updateLocationInfo() {
         });
     })
 }
+/**
+ * OPEN API 활용 2: kakao map api
+ * 화면에 지도 표시
+ */
 function drawMap() {
     let position;
     //dom 로드 완료됐을 시.
@@ -35,17 +44,28 @@ function drawMap() {
 
         searchTheater()
 
-    }).catch(_ => {
-        console.log(_);
+    }).catch(_ => { // 위치 기반 서비스 요청을 거부했을 경우.
         alert("위치 기반 서비스를 제공하는 페이지입니다. 설정에서 위치정보를 허용해주세요.")
     });
 }
+
+/**
+ * 지도를 옮긴 후 현재 위치에서 재검색 버튼을 눌렀을 때 호출되는 메소드.
+ * @param e
+ */
 function onClickRenewButton(e){
     if(renewBtnEnabled){
         enableRenewButton(e, false);
         searchTheater();
     }
 }
+
+/**
+ * 재검색 버튼을 누른 후 호출 남용을 막기 위해 한 번 호출 후 재검색 비활성화.
+ * 지도의 영역이 달라진 경우 다시 재검색 활성화.
+ * @param element
+ * @param enabled
+ */
 function enableRenewButton(element, enabled = true){
     if(renewBtnEnabled){
         element.disabled = true;
@@ -54,6 +74,10 @@ function enableRenewButton(element, enabled = true){
     }
     renewBtnEnabled = ! renewBtnEnabled;
 }
+
+/**
+ * 현재 지도 area에서 영화관 검색 후 마커 띄우기.
+ */
 function searchTheater(){
     let infoWindow = new kakao.maps.InfoWindow({zIndex: 1});
 
@@ -61,7 +85,6 @@ function searchTheater(){
 
     searchable.keywordSearch('영화관', (data, status)=>{
         if(status === kakao.maps.services.Status.OK){
-            //let bounds = new kakao.maps.LatLngBounds();
 
             for(let i=0;i<data.length;i++){
                 let theater = data[i];
@@ -74,9 +97,7 @@ function searchTheater(){
                         + theater.place_name + '</p></div>');
                     infoWindow.open(map, marker);
                 });
-                //bounds.extend(new kakao.maps.LatLng(theater.y, theater.x));
             }
-           // map.setBounds(bounds);
         }
     }, {useMapBounds: true});
 
