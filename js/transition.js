@@ -8,6 +8,8 @@ const selectors = [".title-container", ".daily-container",
 let now = HOME;
 let availableState = true;
 
+let mapDrawn = false;
+
 /**
  * @param {number} id
  */
@@ -24,6 +26,10 @@ function appear(id, delay, duration){
     const appearContainer = document.querySelector(selectors[id]);
     setTimeout(()=>{
         appearContainer.style.display = "flex";
+        if(id === THEATERS && ! mapDrawn){
+            drawMap();
+            mapDrawn = true;
+        }
     }, delay)
     let keyframes = [
         {opacity: "0"},

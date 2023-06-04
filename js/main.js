@@ -106,9 +106,6 @@ function requestYearlyReleased(year, page) {
 }
 
 function onClickYearly() {
-    let container = document.querySelector('.yearly-released-container');
-    container.innerHTML = '<div class="loading" id="daily-loading"></div>';
-
     let year = document.getElementById("released-year").value;
     year = parseInt(year);
     let nowYear = new Date().getFullYear();
@@ -116,6 +113,10 @@ function onClickYearly() {
         alert("1939년도 이전이나 " + nowYear.toString() + "년도 이후의 영화는 조회할 수 없습니다.");
         return;
     }
+
+
+    let container = document.querySelector('.yearly-released-container');
+    container.innerHTML = '<div class="loading" id="daily-loading"></div>';
 
     setDailyLoadingStatus(true);
     requestYearlyReleased(year, 1).then(data => {

@@ -71,7 +71,7 @@ hr + p {
     height: 100vh;
 }
 
-input[type='button'][value='확인'] {
+input[type='button'][value='확인'], button {
     border-radius: 5px;
     background-color: #000;
     height: 100%;
@@ -85,7 +85,7 @@ input[type='button'][value='확인'] {
     transition: 200ms ease-out;
 }
 
-input[type='button'][value='확인']:hover {
+input[type='button'][value='확인']:hover, button:hover {
     background-color: #fff;
     color: #000;
 }

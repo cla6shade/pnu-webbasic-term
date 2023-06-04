@@ -1,7 +1,38 @@
 .theaters-container {
     display: none;
     flex-direction: column;
+    align-items: center;
 }
 .theaters-area {
     flex-grow: 1;
+    width: 100%;
+    max-width: 400px;
+}
+.map-container {
+    max-width: 400px;
+    height: 400px;
+    width: 100%;
+}
+.map-marker-info {
+    padding: 5px;
+    font-size: 13px;
+}
+.renew-button-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+.map-renew {
+    background-color: #000;
+    color: #fff;
+    border: #fff 1px solid;
+    border-radius: 20px;
+    height: 40px;
+    width: 200px;
+    cursor: pointer;
+}
+.map-renew:disabled {
+    background-color: #737373;
+    color: #a1a1a1;
+    border: none;
 }
