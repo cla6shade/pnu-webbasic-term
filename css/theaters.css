@@ -31,6 +31,9 @@
     width: 200px;
     cursor: pointer;
 }
+#search-radius {
+    border-radius: 5px;
+}
 .map-renew:disabled {
     background-color: #737373;
     color: #a1a1a1;

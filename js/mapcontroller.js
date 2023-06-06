@@ -51,11 +51,10 @@ function drawMap() {
 
 /**
  * 지도를 옮긴 후 현재 위치에서 재검색 버튼을 눌렀을 때 호출되는 메소드.
- * @param e
  */
-function onClickRenewButton(e){
+function onClickRenewButton(){
     if(renewBtnEnabled){
-        enableRenewButton(e, false);
+        enableRenewButton();
         searchTheater();
     }
 }
@@ -63,29 +62,38 @@ function onClickRenewButton(e){
 /**
  * 재검색 버튼을 누른 후 호출 남용을 막기 위해 한 번 호출 후 재검색 비활성화.
  * 지도의 영역이 달라진 경우 다시 재검색 활성화.
- * @param element
- * @param enabled
  */
-function enableRenewButton(element, enabled = true){
-    if(renewBtnEnabled){
-        element.disabled = true;
-    } else {
-        element.disabled = false;
-    }
+function enableRenewButton(){
+    let element = document.getElementById("map-renew-btn");
+    element.disabled = renewBtnEnabled;
     renewBtnEnabled = ! renewBtnEnabled;
+}
+
+function onChangeRadius() {
+    if( ! renewBtnEnabled)
+        enableRenewButton();
 }
 
 /**
  * 현재 지도 area에서 영화관 검색 후 마커 띄우기.
  */
 function searchTheater(){
+    let radiusElementValue = document.getElementById("search-radius").value;
+    let radius = parseInt(radiusElementValue);
+    if(radiusElementValue === ""){
+        radius = 5000;
+    }
+    if(radius < 0 || radius > 20000){
+        alert("반경은 0~20000m까지만 설정 가능합니다.");
+        return;
+    }
     let infoWindow = new kakao.maps.InfoWindow({zIndex: 1});
 
     searchable.setMap(map);
 
     searchable.keywordSearch('영화관', (data, status)=>{
         if(status === kakao.maps.services.Status.OK){
-
+            let bounds = new kakao.maps.LatLngBounds();
             for(let i=0;i<data.length;i++){
                 let theater = data[i];
                 let marker = new kakao.maps.Marker({
@@ -97,8 +105,11 @@ function searchTheater(){
                         + theater.place_name + '</p></div>');
                     infoWindow.open(map, marker);
                 });
+                bounds.extend(new kakao.maps.LatLng(theater.y, theater.x));
             }
+            map.setBounds(bounds);
+            enableRenewButton();
         }
-    }, {useMapBounds: true});
+    }, {useMapCenter: true, radius: radius});
 
 }
