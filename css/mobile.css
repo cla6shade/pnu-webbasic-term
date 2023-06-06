@@ -5,8 +5,8 @@
         height: calc(var(--vh, 1vh) * 100);
     }
 
-    .tab-container {
-        height: calc(var(--vh) - 30px - 90px)
+    .content-container {
+        max-height: calc(var(--vh) - 30px - 90px)
     }
 
     .main-content {
