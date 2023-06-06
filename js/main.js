@@ -61,7 +61,7 @@ async function getDailyBoxOffice(y, m, d) {
  */
 function onClickDaily() {
     let dateInputs =
-        document.querySelectorAll(".date-input-container input[type='number']");
+        document.querySelectorAll(".date-input-container input[type='number']");// DOM API
     let dates = []
 
     let container = document.querySelector(".box-office-container");
@@ -95,7 +95,7 @@ function onClickDaily() {
  * 일별 박스오피스 순위를 받아서 daily 탭의 flexbox에 표시.
  * @param boxOffice
  */
-function displayDailyBoxOffice(boxOffice) {
+function displayDailyBoxOffice(boxOffice) {// DOM API
     const container = document.querySelector(".box-office-container");
     for (let movie of boxOffice) {
         let posterUrl = movie.posterUrl;
@@ -208,7 +208,7 @@ function onClickYearly() {
  * @param loading
  */
 function setDailyLoadingStatus(loading = true) {
-    let spin = document.querySelector(".loading");
+    let spin = document.querySelector(".loading"); // DOM API
     if (loading) {
         spin.style.display = "block";
     } else {

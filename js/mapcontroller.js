@@ -25,7 +25,7 @@ function drawMap() {
     updateLocationInfo().then(updatedPosition => {
         position = updatedPosition;
 
-        let mapContainer = document.getElementById("map");
+        let mapContainer = document.getElementById("map");// DOM API
 
         let centerLatlng  =
             new kakao.maps.LatLng(position.coords.latitude, position.coords.longitude);

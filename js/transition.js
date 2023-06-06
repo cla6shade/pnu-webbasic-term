@@ -29,7 +29,7 @@ function transfer(id){
  * @param delay
  * @param duration
  */
-function appear(id, delay, duration){
+function appear(id, delay, duration){// DOM API
     const appearContainer = document.querySelector(selectors[id]);
     setTimeout(()=>{
         appearContainer.style.display = "flex";

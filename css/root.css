@@ -48,7 +48,7 @@ input[type='number']::placeholder {
     font-size: 15px;
 }
 
-h1 + h3 {
+h1 + h3 { /*combinator 6*/
     font-size: 23px;
     color: #ff6565;
     margin-top: 6px;

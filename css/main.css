@@ -73,7 +73,7 @@
     align-items: center;
 }
 
-.content > h1 {
+.content > h1 {/*combinator 5*/
     margin-top: 80px;
     font-size: 65px;
     font-weight: bold;
