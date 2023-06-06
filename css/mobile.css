@@ -2,7 +2,11 @@
 @media (max-width: 900px) {
     .main-content { /* 모바일 환경에서 뷰포트 크기를 100vw로 설정하면 스크롤이 발생하는 문제 해결*/
         width: 100vw;
-        height: calc(var(--vh, 1vh) * 100 - 120px);
+        height: calc(var(--vh, 1vh) * 100);
+    }
+
+    .content-container {
+        min-height: calc(100 * var(--vh) - 120px);
     }
 
     .main-content {
