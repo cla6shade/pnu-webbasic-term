@@ -31,7 +31,7 @@ function drawMap() {
             new kakao.maps.LatLng(position.coords.latitude, position.coords.longitude);
         let mapOption = {
             center: centerLatlng,
-            level: 3
+            level: 5
         }
 
         map = new kakao.maps.Map(mapContainer, mapOption);
