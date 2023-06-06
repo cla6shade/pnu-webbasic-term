@@ -17,7 +17,6 @@ let mapDrawn = false;
 function transfer(id){
     if(availableState && now !== id){
         availableState = false;
-        console.log(id)
         vanish(300);
         appear(id, 300, 300);
         now = id;

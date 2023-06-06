@@ -1,0 +1,56 @@
+/* 모바일 환경 대응 */
+@media (max-width: 900px) {
+    body { /* 모바일 환경에서 뷰포트 크기를 100vw로 설정하면 스크롤이 발생하는 문제 해결*/
+        width: 100vw;
+        height: calc(var(--vh, 1vh) * 100);
+    }
+
+    h1 + h3 {
+        font-size: 18px;
+    }
+
+    hr + p {
+        font-size: 12px;
+    }
+
+    .navbar ul {
+        padding-left: 20px;
+    }
+
+    .navbar ul li {
+        width: 68px;
+    }
+
+    .content-container {
+        max-width: calc(100vw - 20px);
+    }
+
+    .content > h1 {
+        margin-top: 80px;
+        font-size: 40px;
+        font-weight: bold;
+        color: #fff;
+    }
+
+    .date-input-container > p {
+        font-size: 15px;
+    }
+
+    .box-office-container {
+        max-width: calc(100vw - 20px);
+    }
+
+    input[type='number'][placeholder="YYYY"] {
+        width: 80px;
+    }
+
+    .date-input-container input[type='number']:nth-child(3) {
+        margin-left: 10px;
+        width: 60px;
+    }
+
+    .date-input-container input[type='number']:nth-child(4) {
+        margin-left: 10px;
+        width: 60px;
+    }
+}
