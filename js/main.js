@@ -1,5 +1,8 @@
 const key = "12bc474714005e3fb5259fa5f0cfc9be"
 
+let vh = window.innerHeight * 0.01;
+document.documentElement.style.setProperty('--vh', `${vh}px`);
+
 /**
  * movieCd를 기반으로 포스터를 받아오는 기능.
  * openAPI에서 제공하지 않는 기능을 만들기 위해 웹 서버를 직접 만들었음.
