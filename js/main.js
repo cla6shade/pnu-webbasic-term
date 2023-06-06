@@ -49,11 +49,11 @@ function requestDailyBoxOffice(targetDt) {
  * @param d
  * @returns {Promise<Object[]>}
  */
-async function getDailyBoxOffice(y, m, d) {
+function getDailyBoxOffice(y, m, d) {
     m = m < 10 ? "0" + m.toString() : m.toString();
     d = d < 10 ? "0" + d.toString() : d.toString();
     let targetDt = y + m + d;
-    return await requestDailyBoxOffice(targetDt);
+    return requestDailyBoxOffice(targetDt);
 }
 
 /**
@@ -129,7 +129,7 @@ function requestYearlyReleased(year, page) {
     return new Promise((resolve, reject) => {
         $.ajax('http://www.kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieList.json?key=' +
             key + '&openStartDt=' + year.toString() + '&openEndDt=' + year.toString() + '&itemPerPage=20&curPage=' + page
-        ).done(async data => {
+        ).done(data => {
             resolve(data);
         }).fail((xhr, textStatus, error) => {
             reject(error);
